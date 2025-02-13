@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Map with Dynamic Routes</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    /* Set height of the map */
+    #map {
+      height: 400px;
+      width: 100%;
+    }
+    #panel {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Travel Map with Dynamic Routes</h2>
+
+<!-- Div where map will be rendered -->
+<div id="map"></div>
+
+<!-- Input fields for starting and ending locations -->
+<div id="panel">
+  <label for="start">Start: </label>
+  <input id="start" type="text" value="Jaisalmer, Rajasthan">
+  
+  <label for="end">End: </label>
+  <input id="end" type="text" value="Khuri, Rajasthan">
+  
+  <button id="route-btn">Get Route</button>
+</div>
+
+<!-- Load Leaflet.js -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+  const map = L.map('map').setView([26.9157, 70.9083], 10); // Initialize the map at Jaisalmer coordinates
+
+  // Load and display tile layers from OpenStreetMap
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+  }).addTo(map);
+
+  let startMarker;
+  let endMarker;
+
+  // Add event listener to the route button
+  document.getElementById("route-btn").addEventListener("click", function(event) {
+    event.preventDefault(); // Prevent the default button action
+    calculateAndDisplayRoute();
+  });
+
+  // Function to calculate and display the route
+  function calculateAndDisplayRoute() {
+    const start = document.getElementById("start").value;
+    const end = document.getElementById("end").value;
+
+    // Geocode the start and end locations using the Nominatim API
+    const geocodeURL = 'https://nominatim.openstreetmap.org/search?format=json&limit=1&q=';
+    
+    fetch(geocodeURL + encodeURIComponent(start))
+      .then(response => response.json())
+      .then(data => {
+        if (data.length > 0) {
+          const startCoords = [data[0].lat, data[0].lon];
+          
+          // Add start marker
+          if (startMarker) {
+            map.removeLayer(startMarker);
+          }
+          startMarker = L.marker(startCoords).addTo(map).bindPopup("Start: " + start).openPopup();
+          map.setView(startCoords, 10); // Center the map on the start location
+
+          return fetch(geocodeURL + encodeURIComponent(end));
+        } else {
+          alert("Start location not found.");
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.length > 0) {
+          const endCoords = [data[0].lat, data[0].lon];
+
+          // Add end marker
+          if (endMarker) {
+            map.removeLayer(endMarker);
+          }
+          endMarker = L.marker(endCoords).addTo(map).bindPopup("End: " + end).openPopup();
+
+          // Display route between markers
+          L.polyline([startMarker.getLatLng(), endMarker.getLatLng()], { color: 'blue' }).addTo(map);
+          map.fitBounds([startMarker.getLatLng(), endMarker.getLatLng()]); // Adjust map view to fit the route
+
+        //   // Clear the input fields
+        //   document.getElementById("start").value = "";
+        //   document.getElementById("end").value = "";
+
+          // Reload the page to clear previous routes
+          setTimeout(() => {
+            location.reload(); // Reload the page after a brief delay
+          }, 5000); // Change the delay time (in milliseconds) if needed
+        } else {
+          alert("End location not found.");
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching location data:', error);
+      });
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Map with Dynamic Routes</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    /* Set height of the map */
+    #map {
+      height: 400px;
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Body styling */
+    body {
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      background: linear-gradient(to right,#32936f, #feb47b);
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    /* Heading styling */
+    h2 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+    }
+
+    /* Panel styling */
+    #panel {
+      margin-top: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 10px;
+      backdrop-filter: blur(5px);
+    }
+
+    /* Input field styling */
+    input {
+      padding: 10px;
+      margin: 5px;
+      border: none;
+      border-radius: 5px;
+      width: calc(50% - 20px);
+      font-size: 1em;
+      transition: all 0.3s ease;
+    }
+
+    /* Input field focus effect */
+    input:focus {
+      outline: none;
+      box-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+    }
+
+    /* Button styling */
+    button {
+      padding: 10px 20px;
+      background: #2B8DA3;
+      border: none;
+      border-radius: 5px;
+      color:#F4E3C4;
+      font-size: 1.2em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    /* Button hover effect */
+    button:hover {
+      background:#6EC6E6;
+      transform: scale(1.05);
+    }
+
+    /* Responsive styling */
+    @media (max-width: 600px) {
+      input {
+        width: calc(100% - 20px);
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<h2>Exploration Blueprint</h2>
+
+<!-- Div where map will be rendered -->
+<div id="map"></div>
+
+<!-- Input fields for starting and ending locations -->
+<div id="panel">
+  <label for="start">Start: </label>
+  <input id="start" type="text" value="Jaisalmer, Rajasthan">
+  <br>
+  <label for="end">End: </label>
+  <input id="end" type="text" value="Khuri, Rajasthan">
+  <br>
+  <button id="route-btn">Get Route</button>
+</div>
+
+<!-- Load Leaflet.js -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+  const map = L.map('map').setView([26.9157, 70.9083], 10); // Initialize the map at Jaisalmer coordinates
+
+  // Load and display tile layers from OpenStreetMap
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+  }).addTo(map);
+
+  let startMarker;
+  let endMarker;
+
+  // Add event listener to the route button
+  document.getElementById("route-btn").addEventListener("click", function(event) {
+    event.preventDefault(); // Prevent the default button action
+    calculateAndDisplayRoute();
+  });
+
+  // Function to calculate and display the route
+  function calculateAndDisplayRoute() {
+    const start = document.getElementById("start").value;
+    const end = document.getElementById("end").value;
+
+    // Geocode the start and end locations using the Nominatim API
+    const geocodeURL = 'https://nominatim.openstreetmap.org/search?format=json&limit=1&q=';
+    
+    fetch(geocodeURL + encodeURIComponent(start))
+      .then(response => response.json())
+      .then(data => {
+        if (data.length > 0) {
+          const startCoords = [data[0].lat, data[0].lon];
+          
+          // Add start marker
+          if (startMarker) {
+            map.removeLayer(startMarker);
+          }
+          startMarker = L.marker(startCoords).addTo(map).bindPopup("Start: " + start).openPopup();
+          map.setView(startCoords, 10); // Center the map on the start location
+
+          return fetch(geocodeURL + encodeURIComponent(end));
+        } else {
+          alert("Start location not found.");
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.length > 0) {
+          const endCoords = [data[0].lat, data[0].lon];
+
+          // Add end marker
+          if (endMarker) {
+            map.removeLayer(endMarker);
+          }
+          endMarker = L.marker(endCoords).addTo(map).bindPopup("End: " + end).openPopup();
+
+          // Display route between markers
+          L.polyline([startMarker.getLatLng(), endMarker.getLatLng()], { color: 'blue' }).addTo(map);
+          map.fitBounds([startMarker.getLatLng(), endMarker.getLatLng()]); // Adjust map view to fit the route
+
+          // Reload the page to clear previous routes
+          setTimeout(() => {
+            location.reload(); // Reload the page after a brief delay
+          }, 5000); // Change the delay time (in milliseconds) if needed
+        } else {
+          alert("End location not found.");
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching location data:', error);
+      });
+  }
+</script>
+
+</body>
+</html>

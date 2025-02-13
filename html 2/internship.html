@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internship Portal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div id="login-register-form" class="form-container">
+        <h2>Login or Register</h2>
+        <input type="email" id="email" placeholder="Email">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="login()">Login</button>
+        <button onclick="register()">Register</button>
+        <div id="error-message"></div>
+    </div>
+
+    <div id="opportunities-page" class="hidden">
+        <h2>Opportunities</h2>
+        <div id="opportunities-list"></div>
+        <button id="logout" onclick="logout()">Logout</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        const apiUrl = 'http://localhost:5000';
+        let token = localStorage.getItem('token');
+        if (token) {
+            showOpportunitiesPage();
+        } else {
+            $('#login-register-form').show();
+            $('#opportunities-page').hide();
+        }
+
+        function login() {
+            const email = $('#email').val();
+            const password = $('#password').val();
+            $.post(apiUrl + '/login', { email, password }, function (data) {
+                localStorage.setItem('token', data.token);
+                token = data.token;
+                showOpportunitiesPage();
+            }).fail(function (err) {
+                $('#error-message').text('Login failed!');
+            });
+        }
+
+        function register() {
+            const email = $('#email').val();
+            const password = $('#password').val();
+            $.post(apiUrl + '/register', { email, password }, function () {
+                alert('Registered successfully!');
+            }).fail(function (err) {
+                $('#error-message').text('Registration failed!');
+            });
+        }
+
+        function showOpportunitiesPage() {
+            $('#login-register-form').hide();
+            $('#opportunities-page').show();
+            fetchOpportunities();
+        }
+
+        function fetchOpportunities() {
+            $.get(apiUrl + '/opportunities', {
+                headers: {
+                    'Authorization': token
+                }
+            }, function (data) {
+                let opportunitiesHtml = '';
+                data.forEach(opportunity => {
+                    opportunitiesHtml += `
+                        <div class="opportunity">
+                            <h3>${opportunity.title}</h3>
+                            <button onclick="apply(${opportunity.id})">Apply</button>
+                        </div>
+                    `;
+                });
+                $('#opportunities-list').html(opportunitiesHtml);
+            });
+        }
+
+        function apply(id) {
+            if (!token) {
+                alert('Please log in first');
+                return;
+            }
+            $.post(apiUrl + '/apply', { opportunityId: id }, {
+                headers: {
+                    'Authorization': token
+                }
+            }, function () {
+                alert('Applied successfully!');
+            }).fail(function () {
+                alert('Failed to apply');
+            });
+        }
+
+        function logout() {
+            localStorage.removeItem('token');
+            token = null;
+            $('#login-register-form').show();
+            $('#opportunities-page').hide();
+        }
+    </script>
+
+</body>
+</html>

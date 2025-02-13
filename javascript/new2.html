@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+</head>
+<body>
+  <h1>Welcome to your dashboard</h1>
+  <h2 id="welcomeMessage"></h2>
+
+  <script>
+    // Fetch the username from localStorage
+    const username = localStorage.getItem('loggedInUser');
+
+    if (username) {
+      document.getElementById('welcomeMessage').textContent = `Welcome, ${username}!`;
+    } else {
+      document.getElementById('welcomeMessage').textContent = "No user is logged in!";
+    }
+  </script>
+</body>
+</html>

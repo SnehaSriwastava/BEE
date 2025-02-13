@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>W3school</title>
+    <script src="https://kit.fontawesome.com/ab09901365.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            height: 1000vh;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        nav {
+            width: 100%;
+            height: 13vh;
+            /* border: 2px solid red; */
+            background-color: white;
+            color: black;
+            position: fixed;
+            z-index: 1;
+        }
+        .top{
+            display: flex;
+            height: 8vh;
+        }
+        .img{
+            width: 3%;
+            height: 5vh;
+            margin-top: .5%;
+            margin-left: 1%;
+            margin-right: 2%;
+        }
+        .one li{
+            padding-top: 5%;
+            padding-left: 2%;
+            padding-right: 2%;
+            height: 8vh;
+            list-style: none;
+            text-align: center;
+            align-items: center;
+            color: black;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 15px;
+        }
+        .one li:hover{
+            background-color: #04AA6D;
+            color: white;
+        }
+        .one{
+            display: flex;
+            justify-content:space-between;
+            align-items: center;
+            width: 30%;
+        }
+
+        .search{
+            margin-left: 2%;
+            width: 13%;
+            /* border: 1px solid black; */
+        }
+        .search input{
+            margin-top: 4%;
+            height: 70%;
+            width: 100%;
+            border: 1px solid rgb(65, 63, 63);
+            border-radius: 40px;
+            text-align: left;
+        }
+        button{
+            width: 2%;
+            border: none;
+            cursor: pointer;
+            background-color: white;
+        }
+        #toggle{
+            margin-top: 1.5%;
+            margin-left: 1%;
+            width: 10%;
+            height: 5%;
+        }
+        .nav2 li{
+            padding-top: 5%;
+            padding-left: 2%;
+            padding-right: 2%;
+            cursor: pointer;
+            height: 8vh;
+            list-style: none;
+            text-align: center;
+            align-items: center;
+            color: black;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 15px;
+        }
+        .nav2 li:hover{
+            background-color: #c3c6c5;
+            color: white;
+        }
+        .nav2{
+            display: flex;
+            justify-content:space-evenly;
+            align-items: center;
+            width: 30%;
+        }
+
+        #plus{
+            color: blue;
+        }
+
+        #spaces{
+            color: blue;
+        }
+        #get{
+            color: blue;
+        }
+        .signup{
+            margin-top: 0.5%;
+            width: 7%;
+            height: 70%;
+            border-radius: 40px;
+            color: white;
+            background-color: #04AA6D;
+            z-index: 1;
+        }
+        .login{
+            position: relative;
+            left: -3%;
+            margin-top: .5%;
+            width: 8%;
+            height: 70%;
+            border-radius: 40px;
+            color: black;
+            background-color: #d9e0dd;
+            padding-left: 3%;
+        }
+
+        .bottom{
+            height: 5vh;
+            background-color: rgb(46, 45, 45);
+
+        }
+
+        .nav3{
+            display: flex;
+            color: white;
+        }           
+        .nav3 li{
+            height: 5vh;
+            /* width: 25%; */
+            list-style: none;
+            padding-top: .5%;
+            cursor: pointer;
+            margin-right: 2%;
+            margin-left: 1%;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 15px;
+        }
+        .nav3 li:hover{
+            background-color: black;
+        }
+
+        section {
+            width: 100%;
+            height: 80vh;
+            position: relative;
+        }
+
+        .left {
+            width: 18%;
+            height: 84vh;
+            background-color: rgb(232, 235, 230);
+            position: fixed;
+            top: 13vh;
+            left: 0;
+            overflow: auto;
+        }
+        .left h2{
+            margin: 5%;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 20px;
+            
+        }
+        .listt li{
+            text-align: left;
+           /* margin-left: 5%; */
+            list-style: none;
+            padding: 2%;
+            padding-left: 15%;
+        }
+        .listt li:hover{
+            background-color: rgb(196, 195, 195);
+        }
+        
+
+        .right {
+            width: 70%;
+            height: 80vh;
+            position: absolute;
+            top: 15vh;
+            left: 18%;
+        }
+        .heading1{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 30px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: end;
+            padding-left: 3%;
+            width: 100%;
+            height: 20vh;
+        }
+        .buttons{
+            height: 10vh;
+            display: flex;
+            justify-content: flex-start;
+            align-items: end;
+        }
+        .home{
+            background-color: #04AA6D;
+            padding-top: 1.5%;
+            text-align: center;
+            width: 12%;
+            height: 6.5vh;  
+            margin-left: 2%;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .next{
+            cursor: pointer;
+            background-color: #04AA6D;
+            padding-top: 1.5%;
+            text-align: center;
+            width: 12%;
+            height: 6.5vh;  
+            margin-left: 70%;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        .content{
+            margin-top: 3%;
+            width: 100%;
+            height: 40vh;
+            background-color: #D9EEE1;
+        }
+        .about{
+            padding-top: 5%;
+            margin-left: 2%;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 20px;
+        }
+        .nex{
+            cursor: pointer;
+            background-color: #04AA6D;
+            padding-top: 1.5%;
+            text-align: center;
+            width: 25%;
+            height: 6.5vh;  
+            margin-left: 2%;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <!-- <h2>Navbar</h2> -->
+        <div class="top">
+            <img class="img" src="https://www.w3schools.com/favicon.ico" alt="">
+            <ul class="one">
+                <li>Tutorials <i class="fa-solid fa-caret-down"></i></li>
+                <li>Exercises <i class="fa-solid fa-caret-down"></i></li>
+                <li>Certificates <i class="fa-solid fa-caret-down"></i></li>
+                <li>Services <i class="fa-solid fa-caret-down"></i></li>
+            </ul>
+
+            <!-- search bar -->
+        <div class="search">
+            <input type="text" placeholder="Search...">
+        </div>
+        <button><i id="toggle" class="fa-solid fa-toggle-on"></i></button>
+
+        <ul class="nav2">
+            <li><i id="plus" class="fa-regular fa-star"></i> Plus</li>
+            <li><i id="spaces" class="fa-solid fa-code"></i> Spaces</li>
+            <li><i id="get" class="fa-solid fa-cart-shopping"></i> Get Certified</li>
+        </ul>
+
+        <button class="signup">Sign Up</button>
+        <button class="login">Log in</button>
+
+        </div>
+    
+        <!-- bottom -->
+    
+        <div class="bottom">
+            <ul class="nav3">
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JAVASCRIPT</li>
+                <li>SQL</li>
+                <li>PYTHON</li>
+                <li>JAVA</li>
+                <li>PHP</li>
+                <li>W3.CSS</li>
+                <li>C</li>
+                <li>C++</li>
+                <li>C#</li>
+                <li>BOOTSTRAP</li>
+                <li>REACT</li>
+                <li>MYSQL</li>
+                <li>JQUERY</li>
+                <li>EXCEL</li>
+            </ul>
+        </div>
+
+    </nav>
+
+    
+
+
+    <section>
+        <div class="left">
+            <h2>CSS Tutorial</h2>
+            <ul class="listt">
+                <li>CSS HOME</li>
+                <li>CSS Introduction</li>
+                <li>CSS Syntax</li>
+                <li>CSS Selectors</li>
+                <li>CSS How To</li>
+                <li>CSS Comments</li>
+                <li>CSS Colors </li>
+                <li>CSS Backgrounds</li>
+                <li>CSS Borders</li>
+                <li>CSS Margins</li>
+                <li>CSS Padding</li>
+                <li>CSS Height/Width</li>
+                <li>CSS Box Model</li>
+                <li>CSS Outline </li>
+                <li>CSS Text</li>
+                <li>CSS Fonts</li>
+                <li>CSS Icons</li>
+                <li>CSS Links</li>
+                <li>CSS Lists</li>
+                <li>CSS Tables<i class="fa-solid fa-angle-down"></i></li>
+                <li>CSS Display</li>
+                <li>CSS Max-width</li>
+                <li>CSS Position</li>
+                <li>CSS Z-index</li>
+                <li>CSS Overflow</li>
+                <li>CSS Float <i class="fa-solid fa-angle-down"></i></li>
+                <li>CSS Inline-block</li>
+                <li>CSS Align</li>
+                <li>CSS Combinators</li>
+                <li>CSS Pseudo-class</li>
+                <li>CSS Pseudo-element</li>
+                <li>CSS Opacity</li>
+                <li>CSS Navigation Bar</li>
+                <li>CSS Dropdowns</li>
+                <li>CSS Image Gallery</li>
+                <li>CSS Image Sprites</li>
+                <li>CSS Attr Selectors</li>
+                <li>CSS Forms</li>
+                <li>CSS Counters</li>
+                <li>CSS Website Layout</li>
+                <li>CSS Units</li>
+                <li>CSS Specificity</li>
+                <li>CSS!important</li>
+                <li>CSS Math Functions</li>
+            </ul>
+        </div>
+
+        <div class="right">
+            <div class="heading1">
+                CSS Tutorial
+            </div>
+            <div class="buttons">
+                <div class="home"><i class="fa-solid fa-angle-left"></i> Home</div>
+                <div class="next">Next <i class="fa-solid fa-angle-right"></i></div>
+            </div>
+
+            <div class="content">
+                <div class="about">
+                <div class="div">CSS is the language we use to style an HTML document.</div><br>
+                <div class="div">CSS describes how HTML elements should be displayed.</div><br>
+                <div class="div">This tutorial will teach you CSS from basic to advanced.</div><br>
+                </div>
+
+                <div class="nex">
+                    Start learning CSS now <i class="fa-solid fa-angles-right"></i>
+                </div>
+            </div>
+
+
+        </div>
+        
+
+
+
+
+    </section>
+</body>
+
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morocco - Travel Destination</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        header {
+            position: relative;
+            height: 100vh;
+            background-image: url('https://www.your-image-source.com/morocco.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            color: white;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .overlay h1 {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        .overlay p {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        .overlay a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #006699;
+            color: white;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .overlay a:hover {
+            background-color: #005580;
+        }
+
+        .parallax-section {
+            height: 400px;
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+        }
+
+        .img2 {
+            background-image: url('https://www.your-image-source.com/morocco2.jpg');
+        }
+
+        .content {
+            padding: 50px;
+            background-color: white;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .text-section {
+            flex: 1;
+            padding: 20px;
+            margin-bottom: 40px;
+            max-width: 800px;
+        }
+
+        .text-section h2 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .text-section p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .featured {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-between;
+        }
+
+        .featured img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .featured img:hover {
+            transform: scale(1.05);
+        }
+
+        footer {
+            padding: 30px;
+            text-align: center;
+            background-color: #333;
+            color: white;
+            margin-top: 50px;
+        }
+
+        footer a {
+            color: #ccc;
+        }
+
+        /* Collapsible sections styling */
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #333;
+            font-weight: 600;
+            border-left: 3px solid #ffcc00;
+            padding-left: 10px;
+        }
+
+        p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        section.collapsible-section {
+            border-top: 1px solid #ddd;
+            margin-top: 20px;
+        }
+
+        .collapsible {
+            border-bottom: 1px solid #ddd;
+        }
+
+        .collapsible-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            cursor: pointer;
+        }
+
+        .collapsible-header h4 {
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        .icon {
+            font-size: 24px;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 0;
+            color: #555;
+            font-size: 16px;
+            line-height: 1.5;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+
+        .collapsible-content.open {
+            padding: 10px 0;
+            max-height: 200px;
+        }
+
+        .collapsible-header:hover {
+            color: #ffcc00;
+        }
+
+        .collapsible-header:hover .icon {
+            color: #ffcc00;
+        }
+
+        /* Responsive styling */
+        @media (max-width: 768px) {
+            .overlay h1 {
+                font-size: 2.5rem;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .parallax-section {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                width: 100%;
+                padding: 15px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            .collapsible-header h4 {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="overlay">
+            <h1>Discover Morocco</h1>
+            <p>A Journey through the Land of Colors and Culture</p>
+            <a href="#explore">Explore Now</a>
+        </div>
+    </header>
+
+    <section id="explore" class="content">
+        <div class="text-section">
+            <h2>Explore the Wonders of Morocco</h2>
+            <p>From the vibrant souks of Marrakesh to the stunning Sahara Desert, Morocco is a land of rich history, diverse culture, and breathtaking landscapes. Whether you're hiking through the Atlas Mountains, exploring ancient medinas, or lounging by the coast, there's something for every traveler.</p>
+        </div>
+
+        <div class="featured">
+            <img src="https://www.your-image-source.com/souk.jpg" alt="Morocco Souk">
+            <img src="https://www.your-image-source.com/sahara.jpg" alt="Sahara Desert">
+            <img src="https://www.your-image-source.com/atlas.jpg" alt="Atlas Mountains">
+        </div>
+    </section>
+
+    <section class="parallax-section img2"></section>
+
+    <section class="content">
+        <div class="text-section">
+            <h2>Culture and Cuisine</h2>
+            <p>Moroccan culture is a beautiful blend of Arabic, Berber, and French influences. The food alone is worth the trip, with dishes like tagine and couscous that burst with flavor. Don’t miss out on traditional mint tea, a symbol of hospitality.</p>
+        </div>
+
+        <div class="featured">
+            <img src="https://www.your-image-source.com/tagine.jpg" alt="Moroccan Tagine">
+            <img src="https://www.your-image-source.com/mint-tea.jpg" alt="Moroccan Mint Tea">
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Intro Section -->
+        <section class="intro">
+            <h2>When to go</h2>
+            <p>
+                Spring (March-May) and autumn (September-November) are the most pleasant times, with warm days and cool nights. 
+                Summer (June-August) is stiflingly hot, except in the mountains, while winter can be chilly everywhere. Ramadan sees 
+                many restaurants close during the day and transport options can be limited.
+            </p>
+        </section>
+
+        <!-- Collapsible Sections -->
+        <section class="collapsible-section">
+            <div class="collapsible">
+                <div class="collapsible-header">
+                    <span class="icon">+</span>
+                    <h4>International airports</h4>
+                </div>
+                <div class="collapsible-content">
+                    <p>Details about international airports in Morocco...</p>
+                </div>
+            </div>
+
+            <div class="collapsible">
+                <div class="collapsible-header">
+                    <span class="icon">+</span>
+                    <h4>Getting around</h4>
+                </div>
+                <div class="collapsible-content">
+                    <p>Information about transportation in Morocco...</p>
+                </div>
+            </div>
+
+            <div class="collapsible">
+                <div class="collapsible-header">
+                    <span class="icon">+</span>
+                    <h4>Accommodation</h4>
+                </div>
+                <div class="collapsible-content">
+                    <p>Details on accommodation options...</p>
+                </div>
+            </div>
+
+            <div class="collapsible">
+                <div class="collapsible-header">
+                    <span class="icon">+</span>
+                    <h4>Food & drink</h4>
+                </div>
+                <div class="collapsible-content">
+                    <p>Details about Moroccan cuisine and drinks...</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Morocco Travel Guide. All Rights Reserved.</p>
+        <a href="#">Back to top</a>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.collapsible-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                const icon = header.querySelector('.icon');
+
+                // Close all other collapsible content
+                document.querySelectorAll('.collapsible-content').forEach(c => {
+                    if (c !== content) {
+                        c.classList.remove('open');
+                        c.style.maxHeight = '0';
+                        c.previousElementSibling.querySelector('.icon').textContent = '+';
+                    }
+                });
+
+                // Toggle the clicked section
+                content.classList.toggle('open');
+
+                // Set max-height for smooth animation
+                if (content.classList.contains('open')) {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                    icon.textContent = '-';
+                } else {
+                    content.style.maxHeight = '0';
+                    icon.textContent = '+';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

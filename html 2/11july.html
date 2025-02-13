@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid system in css</title>
+    <style>
+        .container{
+            /* height: 100vh; */
+            width: 90%;
+            border: 2px solid red;
+            margin: auto;
+            display: grid;
+            grid-template-rows: 150px 150px 150px;
+            /* grid-template-columns: 150px 150px 150px; */
+            grid-template-columns: 1fr 1fr 2fr;
+            /* row-gap: 10px;
+            column-gap: 10px;
+             */
+             gap: 10px;
+        }
+
+        .box{
+            color: white;
+        }
+        #box1{
+            background-color: black;
+            grid-area: 3/3/4/4;
+            /* grid-row: 3/4;
+            grid-column: 3/4; */
+        }
+        #box2{
+            background-color: green;
+            grid-column-start: 1;
+            grid-column-end: 4;
+        }
+        #box3{
+            background-color: red;
+        }
+        #box4{
+        background-color: pink;
+        }
+        #box5{
+            background-color: yellow;
+        }
+        #box6{
+            background-color: blue;
+        }
+        #box7{
+            background-color: brown;
+        }
+        #box8{
+            background-color: purple;
+        }
+        #box9{
+            background-color: lightgreen;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box" id="box1">Box 1</div>
+        <div class="box" id="box2">Box 2</div>
+        <div class="box" id="box3">Box 3</div>
+        <div class="box" id="box4">Box 4</div>
+        <div class="box" id="box5">Box 5</div>
+        <div class="box" id="box6">Box 6</div>
+        <div class="box" id="box7">Box 7</div>
+        <div class="box" id="box8">Box 8</div>
+        <div class="box" id="box9">Box 9</div>
+    </div>
+</body>
+</html>

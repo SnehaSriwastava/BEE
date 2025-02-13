@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Photo Profile</title>
+    <style>
+        /* General page styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ffb6c1, #ff69b4);
+        }
+
+        /* Profile section */
+        .profile-section {
+            width: 100%;
+            max-width: 1000px;
+            background-color: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+        }
+
+        .profile-section img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #ff69b4;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-section img:hover {
+            transform: scale(1.1);
+        }
+
+        .profile-section h1 {
+            font-size: 30px;
+            color: #333;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Upload section */
+        .upload-section {
+            margin-top: 20px;
+        }
+
+        .upload-section label {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #ff69b4;
+            color: white;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .upload-section label:hover {
+            background-color: #ff1493;
+            transform: scale(1.05);
+        }
+
+        .upload-section input[type="file"] {
+            display: none;
+        }
+
+        /* Success message */
+        .upload-message {
+            margin-top: 10px;
+            color: #28a745;
+            font-size: 18px;
+        }
+
+        /* Gallery section */
+        .gallery-section {
+            width: 100%;
+            margin-top: 50px;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Set to 3 columns */
+            gap: 20px;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 220px; /* Fixed height for uniformity */
+            object-fit: cover;
+            border-radius: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: repeat(2, 1fr); /* 2 columns on smaller screens */
+            }
+
+            .gallery img {
+                height: 150px; /* Adjust height for smaller screens */
+            }
+
+            .profile-section img {
+                width: 150px;
+                height: 150px;
+            }
+
+            .profile-section h1 {
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery {
+                grid-template-columns: 1fr; /* 1 column on extra small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- User Profile Section -->
+    <div class="profile-section">
+        <img id="userImage" src="default-avatar.png" alt="User Avatar">
+        <h1 id="greeting">Welcome!</h1>
+    </div>
+
+    <!-- Upload Photo Section -->
+    <div class="upload-section">
+        <label for="uploadPhoto">Upload Your Amazing Photos</label>
+        <input type="file" id="uploadPhoto" accept="image/*" multiple onchange="uploadPhotos(event)">
+        <p id="uploadMessage" class="upload-message"></p>
+    </div>
+
+    <!-- Photo Gallery Section -->
+    <div class="gallery-section">
+        <div id="gallery" class="gallery">
+            <!-- Uploaded photos will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        // Function to dynamically greet the user
+        function greetUser() {
+            const currentUser = localStorage.getItem('currentUser');
+            const greetingElement = document.getElementById('greeting');
+            
+            if (currentUser) {
+                greetingElement.innerText = `${currentUser}!`;
+            } else {
+                greetingElement.innerText = 'Welcome!';
+            }
+        }
+
+        // Function to upload and display photos
+        function uploadPhotos(event) {
+            const files = event.target.files;
+            const gallery = document.getElementById('gallery');
+            const uploadMessage = document.getElementById('uploadMessage');
+            uploadMessage.textContent = '';
+
+            if (files.length > 0) {
+                Array.from(files).forEach(file => {
+                    const reader = new FileReader();
+                    reader.onload = function() {
+                        const imgElement = document.createElement('img');
+                        imgElement.src = reader.result;
+                        gallery.appendChild(imgElement);
+                    };
+                    reader.readAsDataURL(file);
+                });
+                uploadMessage.textContent = 'Photos uploaded successfully!';
+            }
+        }
+
+        // Initial greeting for the user
+        greetUser();
+    </script>
+
+</body>
+</html>

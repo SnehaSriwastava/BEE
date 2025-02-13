@@ -1,0 +1,54 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: arial;
+    background-color: #f4f4f4;
+}
+.container{
+    max-width: 800px;
+    padding: 20px;
+    background-color: #ffff;
+    margin: 50px auto;
+    box-shadow: 0px opx 10px rgb(0,0,0,.1);
+}
+h1{
+    text-align: center;
+    margin-bottom: 20px;
+}
+form{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+
+}
+input{
+    width: 45%;
+    padding: 10px;
+
+}
+button{
+    padding: 10px 20px;
+    background-color: green;
+    color: white;
+    border: none;
+}
+button:hover{
+    background-color: lightgreen;
+}
+table{
+    width: 100%;
+    border-collapse: collapse;
+
+}
+table,th,td{
+    border: 1px solid #ddd;
+
+}
+th,td{
+    padding: 10px;
+    text-align:center ;
+
+}

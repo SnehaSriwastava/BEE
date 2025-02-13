@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="project.css">
+</head>
+<body>
+   <div class="header">
+    <h1>Exploration Lounge</h1>
+   </div>
+    
+    <div class="root">
+        <div class="left-pane">
+            <h3>Ask and Adventure</h3>
+            <div class="fixed-questions" id="fixedQuestions">
+                <ul>
+                    <li onclick="showFixedQues('What is your top tip for first time traveller?')"><span id="quest">Tips</span><br>What is your top tip for first time traveller?</li><hr>
+                    <li onclick="showFixedQues('What unique cultural experiences have you had during your travels that you think everyone should try?')"><span id="quest">Cultural Experiences</span><br>What unique cultural experiences have you had during your travels that you think everyone should try?</li><hr>
+                    <li onclick="showFixedQues('What are some of the biggest challenges you\'ve faced while traveling?')"><span id="quest">Travel Challenges</span><br>What are some of the biggest challenges you've faced while traveling?</li><hr>
+                    <li onclick="showFixedQues('Do you prefer organized tours or exploring on your own?')"><span id="quest">Preferences</span><br>Do you prefer organized tours or exploring on your own?</li><hr>
+                </ul>
+            </div>
+            <h3 id="header2">Inquiry Corner</h3>
+            <div class="questions" id="questions"></div>
+        </div>
+        
+        <div class="right-pane">
+            <h2>Welcome to the Exploration Lounge</h2>
+            <p>Enter a subject and question to get started</p>
+            <form class="question-form" id="questionForm">
+                <input type="text" id="subject" placeholder="Subject" required/>
+                <textarea id="question" placeholder="Question" required></textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+    
+    <script src="project.js"></script>
+</body>
+</html>

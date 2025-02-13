@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    /* Your existing CSS */
+  </style>
+  <title>Sign In / Sign Up</title>
+</head>
+<body>
+  <div class="container" id="container">
+    <img src="image1.jpg" alt="image1" id="image1" />
+
+    <div class="forms-container">
+      <div class="signin-signup">
+        <!-- Sign In Form -->
+        <form action="#" class="sign-in-form">
+          <h2 class="title">Sign in</h2>
+          <div class="input-field">
+            <i class="fas fa-user"></i>
+            <input type="text" placeholder="Username" id="loginUserName" required />
+          </div>
+          <div class="input-field">
+            <i class="fas fa-lock"></i>
+            <input type="password" placeholder="Password" id="loginPassword" required />
+          </div>
+          <button type="submit" class="btn">Login</button>
+          <p class="social-text">Or Sign in with social platforms</p>
+          <div class="social-media">
+            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-google"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </form>
+
+        <!-- Sign Up Form -->
+        <form action="#" class="sign-up-form">
+          <h2 class="title">Sign up</h2>
+          <div class="input-field">
+            <i class="fas fa-user"></i>
+            <input type="text" placeholder="Username" id="userName" required />
+          </div>
+          <div class="input-field">
+            <i class="fas fa-envelope"></i>
+            <input type="email" placeholder="Email" id="email" required />
+          </div>
+          <div class="input-field">
+            <i class="fas fa-lock"></i>
+            <input type="password" placeholder="Password" id="password" required />
+          </div>
+          <button type="submit" class="btn">Sign up</button>
+          <p class="social-text">Or Sign up with social platforms</p>
+          <div class="social-media">
+            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-google"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="panels-container">
+      <div class="panel left-panel">
+        <div class="content">
+          <h3>New here?</h3>
+          <p>Sign up and discover great new experiences!</p>
+          <button class="btn transparent" id="sign-up-btn">Sign up</button>
+        </div>
+        <img src="image2.jpg" class="image" alt="image2" />
+      </div>
+      <div class="panel right-panel">
+        <div class="content">
+          <h3>One of us?</h3>
+          <p>To keep connected with us please login with your personal info</p>
+          <button class="btn transparent" id="sign-in-btn">Sign in</button>
+        </div>
+        <img src="image3.jpg" class="image" alt="image3" />
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const signUpBtn = document.getElementById('sign-up-btn');
+    const signInBtn = document.getElementById('sign-in-btn');
+    const container = document.getElementById('container');
+
+    signUpBtn.addEventListener('click', () => {
+      container.classList.add('sign-up-mode');
+    });
+
+    signInBtn.addEventListener('click', () => {
+      container.classList.remove('sign-up-mode');
+    });
+
+    const getStoredUsers = () => {
+      const usersJSON = localStorage.getItem('users');
+      return usersJSON ? JSON.parse(usersJSON) : [];
+    };
+
+    const signIn = (event) => {
+      event.preventDefault();
+
+      const loginUserName = document.getElementById('loginUserName').value;
+      const loginPassword = document.getElementById('loginPassword').value;
+
+      // Get the existing users from localStorage
+      const users = getStoredUsers();
+
+      // Check if the user exists
+      const user = users.find(user => user.userName === loginUserName && user.password === loginPassword);
+
+      if (user) {
+        alert('Login successful!');
+
+        // Store the logged-in username in localStorage
+        localStorage.setItem('loggedInUser', loginUserName);
+
+        // Redirect to dashboard page (you can create a dashboard.html or welcome.html)
+        window.location.href = "dashboard.html";
+      } else {
+        alert('Invalid username or password. Please try again.');
+      }
+    };
+
+    const signUp = (event) => {
+      event.preventDefault();
+
+      const userName = document.getElementById('userName').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      if (!userName || !email || !password) {
+        alert('Please fill in all fields!');
+        return;
+      }
+
+      // Email validation
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(email)) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+
+      // Get the existing users from localStorage
+      const users = getStoredUsers();
+
+      // Check if the user already exists by username or email
+      const userExists = users.some(user => user.userName === userName || user.email === email);
+      if (userExists) {
+        alert('User with this username or email already exists. Please choose another.');
+        return;
+      }
+
+      // Create a new user object
+      const newUser = {
+        userName: userName,
+        email: email,
+        password: password
+      };
+
+      // Add the new user to the users array
+      users.push(newUser);
+
+      // Store the updated users array in localStorage
+      localStorage.setItem('users', JSON.stringify(users));
+
+      alert('Sign up successful! Your data has been saved locally.');
+
+      // Reset the sign-up form fields
+      document.querySelector('.sign-up-form').reset();
+    };
+
+    document.querySelector('.sign-in-form').addEventListener('submit', signIn);
+    document.querySelector('.sign-up-form').addEventListener('submit', signUp);
+  </script>
+
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</body>
+</html>

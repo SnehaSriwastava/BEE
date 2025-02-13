@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">   
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore India: Regions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            /* background-color: #f4f4f4; */
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* background-color: #fff; */
+            padding: 40px; /* Increased padding */
+            border-radius: 8px;
+            /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
+            max-width: 1200px; /* Increased max width */
+            width: 100%; /* Ensures it covers the full width of the screen */
+            margin: 20px;
+        }
+
+        .destination-wrapper {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            /* Makes the grid responsive */
+            gap: 150px;
+            width: 100%;
+        }
+
+        .destination-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* background-color: #fff; */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .destination-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .destination-card h1 {
+            margin-top: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .description {
+            margin-top: 10px;
+            font-size: 16px;
+            text-align: center;
+            color: #555;
+        }
+
+        .explore-btn {
+            margin-top: 20px;
+            padding: 12px 30px;
+            background-color: #3498db;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .explore-btn:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Explore India: North, South, East, and West</h1>
+        <div class="destination-wrapper">
+            <!-- North India Card -->
+            <div class="destination-card">
+                <img src="img1.jpg" alt="North India" />
+                <h1>North India: Manali</h1>
+                <p class="description">
+                    Discover the scenic beauty of Manali, nestled in the mountains of Himachal Pradesh. A perfect getaway for adventure and nature lovers.
+                </p>
+                <button class="explore-btn">Explore Manali</button>
+            </div>
+
+            <!-- South India Card -->
+            <div class="destination-card">
+                <img src="img1.jpg" alt="South India" />
+                <h1>South India: Munnar</h1>
+                <p class="description">
+                    Visit Munnar, Kerala, renowned for its lush tea plantations and breathtaking hills, perfect for a peaceful retreat.
+                </p>
+                <button class="explore-btn">Explore Munnar</button>
+            </div>
+
+            <!-- East India Card -->
+            <div class="destination-card">
+                <img src="img2.jpg" alt="East India" />
+                <h1>East India: Dawki</h1>
+                <p class="description">
+                    Explore Dawki in Meghalaya, with its pristine Umngot River and lush landscapes that provide a surreal experience.
+                </p>
+                <button class="explore-btn">Explore Dawki</button>
+            </div>
+
+            <!-- West India Card -->
+            <div class="destination-card">
+                <img src="img1.jpg" alt="West India" />
+                <h1>West India: Udaipur</h1>
+                <p class="description">
+                    Discover Udaipur, Rajasthan, famous for its beautiful lakes and royal palaces, offering a glimpse into the rich history of India.
+                </p>
+                <button class="explore-btn">Explore Udaipur</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

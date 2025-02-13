@@ -1,0 +1,36 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.box{
+    width: 60%;
+    height: 50vh;
+    border: 2px  solid red;
+    margin: auto;
+    padding: 15px;
+    display: none;
+
+}
+.box h1{
+    text-align: center;
+}
+.box p{
+    margin-top: 30px;
+}
+@media screen and
+(max-width : 500px) and
+(min-width : 200px)
+{
+
+    .box{
+        display: block;
+    }
+    body{
+        background-color: red;
+        color: white;
+    }
+
+}
+
+    

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destination Guide</title>
+    <style>
+        /* Basic resets */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #333;
+            font-weight: 600;
+            border-left: 3px solid #ffcc00;
+            padding-left: 10px;
+        }
+
+        p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        section.collapsible-section {
+            border-top: 1px solid #ddd;
+            margin-top: 20px;
+        }
+
+        .collapsible {
+            border-bottom: 1px solid #ddd;
+        }
+
+        .collapsible-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            cursor: pointer;
+        }
+
+        .collapsible-header h4 {
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        .icon {
+            font-size: 24px;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 0;
+            color: #555;
+            font-size: 16px;
+            line-height: 1.5;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+        }
+
+        .collapsible-content.open {
+            padding: 10px 0;
+            max-height: 200px; /* You can adjust this to fit the content */
+        }
+
+        .collapsible-header:hover {
+            color: #ffcc00;
+        }
+
+        .collapsible-header:hover .icon {
+            color: #ffcc00;
+        }
+
+        /* Responsive styling */
+        @media (max-width: 600px) {
+            .container {
+                width: 100%;
+                padding: 15px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            .collapsible-header h4 {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Intro Section -->
+    <section class="intro">
+        <h2>When to go</h2>
+        <p>
+            Spring (March-May) and autumn (September-November) are the most pleasant times, with warm days and cool nights. 
+            Summer (June-August) is stiflingly hot, except in the mountains, while winter can be chilly everywhere. Ramadan sees 
+            many restaurants close during the day and transport options can be limited.
+        </p>
+    </section>
+
+    <!-- Collapsible Sections -->
+    <section class="collapsible-section">
+        <div class="collapsible">
+            <div class="collapsible-header">
+                <span class="icon">+</span>
+                <h4>International airports</h4>
+            </div>
+            <div class="collapsible-content">
+                <p>Details about international airports in Morocco...</p>
+            </div>
+        </div>
+
+        <div class="collapsible">
+            <div class="collapsible-header">
+                <span class="icon">+</span>
+                <h4>Getting around</h4>
+            </div>
+            <div class="collapsible-content">
+                <p>Information about transportation in Morocco...</p>
+            </div>
+        </div>
+
+        <div class="collapsible">
+            <div class="collapsible-header">
+                <span class="icon">+</span>
+                <h4>Accommodation</h4>
+            </div>
+            <div class="collapsible-content">
+                <p>Details on accommodation options...</p>
+            </div>
+        </div>
+
+        <div class="collapsible">
+            <div class="collapsible-header">
+                <span class="icon">+</span>
+                <h4>Food & drink</h4>
+            </div>
+            <div class="collapsible-content">
+                <p>Details about Moroccan cuisine and drinks...</p>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<script>
+    document.querySelectorAll('.collapsible-header').forEach(header => {
+        header.addEventListener('click', () => {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.icon');
+
+            // Close all other collapsible content
+            document.querySelectorAll('.collapsible-content').forEach(c => {
+                if (c !== content) {
+                    c.classList.remove('open');
+                    c.style.maxHeight = '0';
+                    c.previousElementSibling.querySelector('.icon').textContent = '+';
+                }
+            });
+
+            // Toggle the clicked section
+            content.classList.toggle('open');
+
+            // Set max-height for smooth animation
+            if (content.classList.contains('open')) {
+                content.style.maxHeight = content.scrollHeight + 'px';
+                icon.textContent = '-';
+            } else {
+                content.style.maxHeight = '0';
+                icon.textContent = '+';
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
