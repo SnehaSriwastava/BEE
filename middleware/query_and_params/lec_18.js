@@ -2,6 +2,7 @@ const express=require("express");
 const app=express();
 
 app.use(express.urlencoded({extended:true}))
+app.use(express.json());
 //converts urlencoded data into objects
 // it is a middleware thant needs to be run on every request
 let userData=[]

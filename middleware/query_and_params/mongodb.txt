@@ -1,0 +1,51 @@
+No need to define any structured schema--schemaless
+No relational database
+eg--mongodB, redis, dynmodb
+
+
+sql-->postgres, mysql
+
+mongodB:-
+1.Collection-(tables in sql) we add document in Collection
+2.Documents-(rows in sql) have key value pair
+3.Mongo shell-command line interface to interact with mongodb database
+
+Mongodb command
+show dbs
+Insert---Insert one
+      ---Insert many-->array of document
+
+db.collection_name.insertOne(objects)
+document store objects
+
+
+commands
+db.users.find()
+ db.users.find({name:"Sakshi"})
+ db.users.find({age:{$gt:19}})   greater than filter
+ db.users.find({age:{$lt:19}})   less than filter
+
+
+ return type of find is array while for findOne it is object or document
+
+ db.users.remove({age:19})
+ db.users.deleteOne({name:"Sakshi"})
+
+
+
+ Update-->update one()
+      -->update many()
+      -->replace one()
+      db.users.updateOne({_id:ObjectId('67b7346c18dbed425f4eeb89')},{$set:{age:40}})
+
+
+-->aggregation pipeline-->when we have to run multiple query at a same time
+another method can be(not useful) first find then loop...till we not find that paticular data.
+
+
+db.user.aggregate(mongosh
+mon)
+
+
+
+mongoose is an odm object document mapper
